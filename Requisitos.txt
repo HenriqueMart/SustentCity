@@ -1,0 +1,32 @@
+DESCRIÇÃO:
+
+## Mostrar o Índice de desmatamento de uma cidade de acordo com sua área e população. O objeto é analisar a área desmatada e sua área verde permitindo que o usuário visualize o nível atual do desmatamento. Com o foco de informar o usuário da área afetada, para que possam ter medidas adequadas de prevenção. ##
+
+
+AQUI ESTA TODOS OS REQUISITOS PRE ADICIONADOS NO FORMULARIO:
+ obs: caso for adicionar outro, coloque em baixo com uma observação.
+
+
+
+# Cadastro de cidades: Struct, alocado dinamicamente, onde vai verificar primeiro se a cidade já foi cadastrada no arquivo antes de começar o cadastro. Depois da verificação será cadastrada a Cidade, População, área atual e área desmatada. Por fim, o usuário escolhe se deseja guardar esse dado no "banco de dados".
+
+
+
+# Gerar Relatório: Irá percorrer toda Struct, onde irá mostrar todas as cidades e suas respectivas populações e áreas.
+
+
+
+# Verificação da Área: Irá verificar os dados que usuário digitou no cadastro, assim verificando a taxa de desmatamento, comparando com sua área atual, com níveis: Verde, amarelo e vermelho. 
+OBS: Terão funções orientando usuários para respectivos níveis. 
+
+
+
+# Função salvar: Irá criar um arquivo .TXT, enviando todos os dados que foram preenchidos na memória do programa para o arquivo.
+
+
+
+# Função carregar: Vai alocar dinamicamente um espaço de memória, onde irá carregar o arquivo, preenchendo com todos os dados pré adicionados em um .TXT.
+
+
+
+# 
