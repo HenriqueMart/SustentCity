@@ -42,11 +42,9 @@ int cadastrarCidade(Cidade **cidades, int *qtd_cidades) {
     }
     /*Tirei a taxa e o a população por área pós o programa que irar   gerar isso na opção 3*/
     
-    
-  //gerando a população por área 
     novacidade->populacaoporarea = novacidade->populacao / (novacidade->populacaoporarea  / 9);
     
-  //Salvando os níveis de alerta co a porcentagem  
+  //Salvando os níveis de alerta com a porcentagem  precisando modificar
   /*if(novacidade->porcentagem > 60){
     novacidade->nivel = "VERDE";
   }else if(novacidade->porcentagem > 40){
@@ -72,7 +70,6 @@ void gerarRelatorio(Cidade *cidades, int qtd_cidades){
   system("cls");
     int opmenu;
     if(qtd_cidades > 0){
-      /*Colocar para mostrar o nível da cidade que é a nova variável na struct*/
         printf("\n\tCidades Cadastradas:\n");
         for(int i = 0; i < qtd_cidades; i++){
                 printf("\nCidade: %s, Codigo: %d\n", cidades[i].nome, cidades[i].codigo );
@@ -226,7 +223,7 @@ void mensagem(Cidade *dados, int cod){
       break;
     }
     }else{
-    printf("ERRO, Nível Nâo definido!\n");
+    printf("\tERRO, Nível Nâo definido!\n");
   }
   return;
 }

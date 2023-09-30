@@ -8,7 +8,8 @@
 
 typedef struct {
 
-  //colocar na função de carregar e salvar cidade!!
+  //Gerando uma cidade de lixo de memória
+  //Erro no o nível, não salvando. verificando a fórmula por população, está errado
   //Só vai salvar ser tiver alguns cidade a mais do que está no arquivo salvo, para não salvar espaço vazio.
   //nível da cidade amarelo, verde ...
   char nivel[letras];
