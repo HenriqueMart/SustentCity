@@ -29,9 +29,31 @@ int cadastrarCidade(Cidade **cidades, int *qtd_cidades) {
     printf("Digite a area desmatada: ");
     scanf("%f", &novacidade->area_desmatada);
 
+    //Criando a fórmula que irá gerar a porcentagem
+    if(novacidade->area < novacidade->area_desmatada){
+      printf("Erro, área desmatada maior que área total da cidade\n");
+      return -1;
+    }
+    novacidade->porcentagem = novacidade->area - novacidade->area_desmatada;  
+    if(novacidade->area == novacidade->area_desmatada){
+      novacidade->porcentagem  = 0;
+    }else if(novacidade->area != novacidade->area_desmatada){
+      novacidade->porcentagem  /= 100;
+    }
     /*Tirei a taxa e o a população por área pós o programa que irar   gerar isso na opção 3*/
-
-  /*Caso desejar, criar um if mostrando com o printf pra o usuário   que essas informações será gerada quando ele selecionar a opção 3, caso a taxa e população por área for igual a 0*/
+    
+    
+  //gerando a população por área 
+    novacidade->populacaoporarea = novacidade->populacao / (novacidade->populacaoporarea  / 9);
+    
+  //Salvando os níveis de alerta co a porcentagem  
+  /*if(novacidade->porcentagem > 60){
+    novacidade->nivel = "VERDE";
+  }else if(novacidade->porcentagem > 40){
+    novacidade->nivel = "AMARELO";
+  }else if(novacidade->porcentagem >= 0){
+    novacidade->nivel  = "VERMELHO";
+  }*/
   
     novacidade->codigo = *qtd_cidades;
 
@@ -40,12 +62,14 @@ int cadastrarCidade(Cidade **cidades, int *qtd_cidades) {
 
     free(novacidade);
     system("clear");
-    printf("\tSalvo com sucesso!\n");
+    printf("Indice de população por 9 metro %.2f\n", novacidade->populacao);
+    printf("%0.2f\n", novacidade->porcentagem);
     return 1;
 }
 
 //RELATORIO TESTE, ADICIONADO UMA FORMA DE MOSTRAR DETALHES SO SE QUISER
 void gerarRelatorio(Cidade *cidades, int qtd_cidades){
+  system("cls");
     int opmenu;
     if(qtd_cidades > 0){
       /*Colocar para mostrar o nível da cidade que é a nova variável na struct*/
@@ -53,11 +77,11 @@ void gerarRelatorio(Cidade *cidades, int qtd_cidades){
         for(int i = 0; i < qtd_cidades; i++){
                 printf("\nCidade: %s, Codigo: %d\n", cidades[i].nome, cidades[i].codigo );
         }
-      printf("\n\tDigite (1) Para Mais Detalhes: ");
+      printf("\n\tDigite (1) Para Mais Detalhes, Voltar (0)\n\tQual opção deseja: ");
       scanf("%d", &opmenu);
       if(opmenu == 1){
         for(int i = 0; i < qtd_cidades; i++){
-          printf("\nCidade: %s\nPopulacao: %0.3f Habitantes\nArea: %0.3f m²\nÁrea Desmatada: %0.3f m²\nTaxa: %d\nPopulação Por Área: %0.2f\n", cidades[i].nome, cidades[i].populacao, cidades[i].area, cidades[i].area_desmatada, cidades[i].taxa, cidades[i].populacaoporarea);
+          printf("\nCidade: %s\nPopulacao: %0.2f Habitantes\nArea: %0.2f m²\nÁrea Desmatada: %0.2f m²\nPorcentagem: %0.1f\nNível %s \nPopulação Por Área: %f\n", cidades[i].nome, cidades[i].populacao, cidades[i].area, cidades[i].area_desmatada, cidades[i].porcentagem, cidades[i].nivel, cidades[i].populacaoporarea);
         }
       }else{
         return;
@@ -69,47 +93,39 @@ void gerarRelatorio(Cidade *cidades, int qtd_cidades){
 
 /* Verificação da Área: Irá verificar os dados que usuário digitou no cadastro, assim verificando a taxa de desmatamento, comparando com sua área atual, com níveis: Verde, amarelo e vermelho. 
 OBS: Terão funções orientando usuários para respectivos níveis. */
-void indicedesmatamento(){
+void indicedesmatamento(Cidade *dados, int tquantidade){
   system("clear");
-  //clear();
+  int opcao = 0, cod;
   printf("\nTELA DE MONITORAMENTO\n");
-  
-  /*Cidade *cidade;
-  Cidade dados = (*dados) malloc(sizeof(cidade);*/
-  int nivel;
-  char nome[100] = "Irecê";
-  float area_desmatada = 0;
-  float area = 10000;
-  float populacao = 100.000;
-  //Criando a fórmula que irá gerar a porcentagem
-  nivel = area - area_desmatada;
-  //int x = len(cidade.niveltotal);
-  
-  if(area >= area_desmatada){
-    int taxa = 0;
-    if(nivel != area){
-      int taxa =  (nivel) / 100;
-    }
+  printf("\tEscolha as opção:\n");
+  printf("\t1 - Verificar todas as cidade Cadastrada\n");
+  printf("\t2 - Digitar o Código da cidade\n\tDigite a opção:");
+  scanf("%d", &opcao);
+  switch(opcao){
+    case 1:
+      gerarRelatorio(dados, tquantidade);
+    case 2:
+      printf("\n\t---------======@======---------\n");
+      printf("Digite o código da cidade:");
+      scanf("%d", &cod);
+      /*Criar um buscar pelo código ou nome da cidade */
+      
+      
+      //Mostrar o gráfico interativo
+      mensagem(dados, cod);
+      
+    break;
+    default:
+    printf("ERRO, Número não válido");
     
-    //gerando a população por área 
-    float populacaoporarea = populacao / (nivel  / 9);
-    printf("Indice de população por 9 metro %.2f\n", populacaoporarea);
-    
-    printf("Porcentagem %d\n", taxa);
-    //lá dentro irar gerar o nível
-    mensagem(taxa, nome);
-  }else{
-    printf("ERRO, área de desmatamento é maior que o total de área verde\n");
   }
-  
   return ;
 }
 
-void mensagem(int porcentagem, char nome){
-  Cidade dados;
-  dados.taxa = "ERRO";
+void mensagem(Cidade *dados, int cod){
   int codigo = -1;
   system("clear");
+  printf("\t\tCidade %s\n", dados[cod].nome);
   printf("\n\t---------======@======---------\n");
   printf("\t               ▲      \n");
   printf("\t              ▲▲▲     \n");
@@ -119,12 +135,12 @@ void mensagem(int porcentagem, char nome){
   printf("\n\t---------======@======---------\n");
   
   
-  printf("\t\tPorcentagem de desmatamento\n");
+  printf("\t\tPorcentagem de área verde\n");
   float auxporcentagem;
-  if(porcentagem  < 5){
+  if(dados[cod].porcentagem  < 5){
       auxporcentagem = 5;
   }else{
-    auxporcentagem = porcentagem;
+    auxporcentagem = dados[cod].porcentagem ;
   }
   for(int i = 0; i < 1; i++){
     printf("\t\t ╔═══════════════════════╗\n");
@@ -137,24 +153,23 @@ void mensagem(int porcentagem, char nome){
       }
       
     }
-    printf(" %d", porcentagem);
+    printf(" %0.1f%%", dados[cod].porcentagem);
     printf("\n");
     printf("\t\t ╚═══════════════════════╝\n");
   // Criando e mostrado de nível com caractere especiais
   }
   
-  
-  if(porcentagem < 40){
-    dados.taxa = "VERDE";
+  /*//comparação com string da struct
+  if(dados[cod].porcentagem  < 40){
      codigo = 2;
   
-  }else if(porcentagem < 60){
-    dados.taxa = "AMARELO";
-   codigo = 1;
-  }else if(porcentagem <= 100){
-    dados.taxa  = "VERMELHO";
+  }else if(dados[cod].porcentagem  < 60){
+
+    codigo = 1;
+  }else if(dados[cod].porcentagem  <= 100){
+
     codigo = 0;
-  }
+  }*/
   
   if(codigo != -1){
     switch(codigo){
@@ -228,7 +243,7 @@ int salvarCidades(Cidade *cidades, char nomeArquivoEstoque[], int qtd_cidades){
         return 0;
     }
   for(int i = 0; i < qtd_cidades; i++){
-    fprintf(arquivo,"%s %0.3f %0.3f %0.3f %d %0.2f %d\n", cidades[i].nome, cidades[i].populacao, cidades[i].area, cidades[i].area_desmatada, cidades[i].taxa, cidades[i].populacaoporarea, cidades[i].codigo);
+    fprintf(arquivo,"%s %0.3f %0.3f %0.3f %0.3f %0.2f %s %d\n", cidades[i].nome, cidades[i].populacao, cidades[i].area, cidades[i].area_desmatada, cidades[i].porcentagem, cidades[i].populacaoporarea, cidades[i].nivel, cidades[i].codigo);
   }
 
   fclose(arquivo);
@@ -249,7 +264,7 @@ int carregarCidades(Cidade **cidades, char nomeArquivoEstoque[], int *qtd_cidade
   *qtd_cidades = 0; 
   
   while (!feof(arquivo)) {
-    fscanf(arquivo, "%s %f %f %f %d %f %d\n", (*cidades)[*qtd_cidades].nome, &(*cidades)[*qtd_cidades].populacao, &(*cidades)[*qtd_cidades].area, &(*cidades)[*qtd_cidades].area_desmatada, &(*cidades)[*qtd_cidades].taxa, &(*cidades)[*qtd_cidades].populacaoporarea, &(*cidades)[*qtd_cidades].codigo);
+    fscanf(arquivo, "%s %f %f %f %f %f %s %d\n", (*cidades)[*qtd_cidades].nome, &(*cidades)[*qtd_cidades].populacao, &(*cidades)[*qtd_cidades].area, &(*cidades)[*qtd_cidades].area_desmatada, &(*cidades)[*qtd_cidades].porcentagem, &(*cidades)[*qtd_cidades].populacaoporarea, &(*cidades)[*qtd_cidades].nivel, &(*cidades)[*qtd_cidades].codigo);
         (*qtd_cidades)++;
     }
 

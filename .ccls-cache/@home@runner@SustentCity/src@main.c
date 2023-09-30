@@ -36,7 +36,7 @@ int main(void) {
                 gerarRelatorio(cidades, qtd_cidades);
                 break;
             case 3:
-                indicedesmatamento();
+                indicedesmatamento(cidades, qtd_cidades);
                 break;
             case 4:
                 if(salvarCidades(cidades, nomeArquivoEstoque, qtd_cidades)){
