@@ -9,7 +9,9 @@
 typedef struct {
 
   //colocar na função de carregar e salvar cidade!!
-  
+  //Só vai salvar ser tiver alguns cidade a mais do que está no arquivo salvo, para não salvar espaço vazio.
+  //nível da cidade amarelo, verde ...
+  int nivel;
   //Mostrar a porcentagem
   int taxa; 
   //Mostrar a taxa da população por área  9metro^2 (OMS)

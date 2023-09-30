@@ -52,6 +52,7 @@ int main(void) {
                 printf("Programa Encerrado!");
                 break;
         }
+    
     }while (opcao != 0);
   free(cidades);
   return 0;
