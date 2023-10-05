@@ -45,13 +45,17 @@ int cadastrarCidade(Cidade **cidades, int *qtd_cidades) {
       //Para gerar a porcentagem era a area desmatada pela area atual * 100
       novacidade->porcentagem = (novacidade->area_desmatada / novacidade->area) * 100.00;
     }
-    /*Tirei a taxa e o a população por área pós o programa que irar   gerar isso na opção 3*/
     
-    //novacidade->populacaoporarea = novacidade->populacao / (novacidade->populacaoporarea / 9);
     //Gerando a densidade demografica, habitante por km²
-    novacidade->populacaoporarea = novacidade->populacao / novacidade->area;
+  /*Área Verde por Pessoa = (Porcentagem de Área Verde * Área Total) /   População
+
+Por exemplo, se 20% da área total é composta por áreas verdes e você tem uma população de 100.000 pessoas em uma área de 50 km²:
+
+Área Verde por Pessoa = (0,20 * 50 km²) / 100.000 = 0,1 km² por pessoa
+
+Portanto, em média, cada pessoa teria acesso a 0,1 quilômetro quadrado de área verde.*/
+    novacidade->populacaoporarea = (novacidade->porcentagem * novacidade->area) * novacidade->populacao;
   
-  //Salvando os níveis de alerta com a porcentagem  precisando modificar
   /* OBS DE GABRIEL: Nao entendi a logica, é a porcentagem de desmatamento? Se for a atribuição é ao contrario, se o nivel de desmatamento for de 1.1 porcento, ele é verde */ //Só inverter os dados e registrar novamente a cidade
   if(novacidade->porcentagem < 40.0){
     char nivelverde[] = "VERDE";
@@ -84,7 +88,7 @@ void gerarRelatorio(Cidade *cidades, int qtd_cidades){
         for(int i = 0; i < qtd_cidades; i++){
           printf("\t╭────────────────────────────────────────╮\n");
           printf("\t│                                        │\n");
-          printf("\t│ Cidade: %s, Codigo: %d\n", cidades[i].nome, cidades[i].codigo );
+          printf("\t│ Cidade: %s, Codigo: %d\n", cidades[i].nome,     cidades[i].codigo );
           printf("\t│                                        │\n");
           printf("\t╰────────────────────────────────────────╯\n");
         }
@@ -97,11 +101,11 @@ void gerarRelatorio(Cidade *cidades, int qtd_cidades){
           printf("\t│                                        │\n");
           printf("\t│ Cidade: %s\n", cidades[i].nome);
           printf("\t│ Populacao: %0.f Habitantes\n", cidades[i].populacao);
-          printf("\t│ Área: %0.1f Km²\n", cidades[i].area);
-          printf("\t│ Área Desmatada: %0.1f Km²\n", cidades[i].area_desmatada);
+          printf("\t│ Área: %0.3f Km²\n", cidades[i].area);
+          printf("\t│ Área Desmatada: %0.3f Km²\n", cidades[i].area_desmatada);
           printf("\t│ Porcentagem: %0.1f% %\n", cidades[i].porcentagem);
           printf("\t│ Nível: %s\n", cidades[i].nivel);
-          printf("\t│ População Por Km²: %0.1f\n", cidades[i].populacaoporarea);
+          printf("\t│ População Por Km²: %1.0f\n", cidades[i].populacaoporarea);
           printf("\t│                                        │\n");
           printf("\t╰────────────────────────────────────────╯\n");
         }
@@ -151,16 +155,9 @@ void indicedesmatamento(Cidade *dados, int tquantidade){
 void mensagem(Cidade *dados, int cod){
   int codigo = -1;
   system("clear");
-  printf("\t\t\tCidade %s\n", dados[cod].nome);
   printf("\n\t---------======@======---------\n");
-  printf("\t               ▲      \n");
-  printf("\t              ▲▲▲     \n");
-  printf("\t             ▲▲▲▲▲    \n");
-  printf("\t            ▲▲▲▲▲▲▲   \n");
-  printf("\t              |||     \n");
+  printf("\t\t\tCidade: %s\n", dados[cod].nome);
   printf("\n\t---------======@======---------\n");
-  
-  
   printf("\t\tPorcentagem de Área Desmatada\n");
   float auxporcentagem;
   if(dados[cod].porcentagem  < 5){
@@ -201,8 +198,16 @@ void mensagem(Cidade *dados, int cod){
   if(codigo != -1){
     switch(codigo){
       case 0:
+        printf("\n\t\t---------======@======---------\n");
+        printf("\t\t           Alerta VERMELHO       \n");
+        printf("\t\t        ▲        ▲        ▲      \n");
+        printf("\t\t       ▲▲▲      ▲▲▲      ▲▲▲     \n");
+        printf("\t\t      ▲▲▲▲▲    ▲▲▲▲▲    ▲▲▲▲▲    \n");
+        printf("\t\t     ▲▲▲▲▲▲▲  ▲▲▲▲▲▲▲  ▲▲▲▲▲▲▲   \n");
+        printf("\t\t       |||      |||      |||     \n");
+        printf("\n\t\t---------======@======---------\n");
         printf("\t╭────────────────────────────────────────╮\n");
-        printf("\t│             Alerta VERMELHO            │\n");
+        printf("\t│                ORIENTAÇÂO              │\n");
         printf("\t│                                        │\n");
         printf("\t│   - Implementar medidas de emergência  │\n");
         printf("\t│   - Restaurando área desmatada         │\n");
@@ -216,8 +221,16 @@ void mensagem(Cidade *dados, int cod){
         printf("\t╰────────────────────────────────────────╯\n");
       break;
       case 1:
+        printf("\n\t\t---------======@======---------\n");
+        printf("\t\t         ALERTA AMARELO        \n");
+        printf("\t\t        ▲        ▲               \n");
+        printf("\t\t       ▲▲▲      ▲▲▲              \n");
+        printf("\t\t      ▲▲▲▲▲    ▲▲▲▲▲             \n");
+        printf("\t\t     ▲▲▲▲▲▲▲  ▲▲▲▲▲▲▲            \n");
+        printf("\t\t       |||      |||      |||     \n");
+        printf("\n\t\t---------======@======---------\n");
         printf("\t╭────────────────────────────────────────╮\n");
-        printf("\t│             Alerta AMARELO             │\n");
+        printf("\t│                ORIENTAÇÂO              │\n");
         printf("\t│                                        │\n");
         printf("\t│   - Restauração de áreas degradas      │\n");
         printf("\t│   - Monitoramento possível focos de    │\n");
@@ -231,8 +244,16 @@ void mensagem(Cidade *dados, int cod){
         printf("\t╰────────────────────────────────────────╯\n");
       break;
       case 2:
+        printf("\n\t\t---------======@======---------\n");
+        printf("\t\t         ALERTA VERDE          \n");
+        printf("\t\t        ▲        ▲        ▲      \n");
+        printf("\t\t       ▲▲▲      ▲▲▲      ▲▲▲     \n");
+        printf("\t\t      ▲▲▲▲▲    ▲▲▲▲▲    ▲▲▲▲▲    \n");
+        printf("\t\t     ▲▲▲▲▲▲▲  ▲▲▲▲▲▲▲  ▲▲▲▲▲▲▲   \n");
+        printf("\t\t       |||      |||      |||     \n");
+        printf("\n\t\t---------======@======---------\n");
         printf("\t╭────────────────────────────────────────╮\n");
-        printf("\t│             Alerta VERDE               │\n");
+        printf("\t│                ORIENTAÇÂO              │\n");
         printf("\t│                                        │\n");
         printf("\t│   - Estabelecer Reservas Naturais      │\n");
         printf("\t│   - Promover agricultura sustentável   │\n");
@@ -291,9 +312,7 @@ int carregarCidades(Cidade **cidades, char nomeArquivoEstoque[], int *qtd_cidade
 }
 
 
-
-
-//FUNCAO TESTE, PODE SER MODIFICADA DE ACORDO COM AS MODIFICACOES
+// FUNCAO DO MENU PRINCIPAL
 void menuPrincipal(){
   printf("\n\t\t--------== SustentCity ==--------\n");
   
@@ -363,12 +382,13 @@ void removerCidade(Cidade **cidades, int *qtd_cidades, int codigobuscar) {
     } else {
         printf("\tCidade não encontrada.\n");
     }
-}void credito(){
+}
+void credito(char nomeCredito){
   system("clear");
   printf("\n\tCRÉDITO DO PROJETO\n");
   printf("\n\tDESENVOLVEDORES:\n");
   printf("\n\tJosé Henrique Martins B. Silva");
-  printf("\n\t Gabriel\n");
+  printf("\n\tGabriel\n");
   
   //FILE *Arquivo = fopen("");
   

@@ -84,7 +84,7 @@ void gerarRelatorio(Cidade *cidades, int qtd_cidades){
         for(int i = 0; i < qtd_cidades; i++){
           printf("\t╭────────────────────────────────────────╮\n");
           printf("\t│                                        │\n");
-          printf("\t│ Cidade: %s, Codigo: %d\n", cidades[i].nome, cidades[i].codigo );
+          printf("\t│ Cidade: %s, Codigo: %d\n", cidades[i].nome,     cidades[i].codigo );
           printf("\t│                                        │\n");
           printf("\t╰────────────────────────────────────────╯\n");
         }
@@ -151,16 +151,9 @@ void indicedesmatamento(Cidade *dados, int tquantidade){
 void mensagem(Cidade *dados, int cod){
   int codigo = -1;
   system("clear");
-  printf("\t\t\tCidade %s\n", dados[cod].nome);
   printf("\n\t---------======@======---------\n");
-  printf("\t               ▲      \n");
-  printf("\t              ▲▲▲     \n");
-  printf("\t             ▲▲▲▲▲    \n");
-  printf("\t            ▲▲▲▲▲▲▲   \n");
-  printf("\t              |||     \n");
+  printf("\t\t\tCidade: %s\n", dados[cod].nome);
   printf("\n\t---------======@======---------\n");
-  
-  
   printf("\t\tPorcentagem de Área Desmatada\n");
   float auxporcentagem;
   if(dados[cod].porcentagem  < 5){
@@ -201,6 +194,14 @@ void mensagem(Cidade *dados, int cod){
   if(codigo != -1){
     switch(codigo){
       case 0:
+        printf("\n\t\t---------======@======---------\n");
+        printf("\t\t               ÁRVORE            \n");
+        printf("\t\t        ▲        ▲        ▲      \n");
+        printf("\t\t       ▲▲▲      ▲▲▲      ▲▲▲     \n");
+        printf("\t\t      ▲▲▲▲▲    ▲▲▲▲▲    ▲▲▲▲▲    \n");
+        printf("\t\t     ▲▲▲▲▲▲▲  ▲▲▲▲▲▲▲  ▲▲▲▲▲▲▲   \n");
+        printf("\t\t       |||      |||      |||     \n");
+        printf("\n\t\t---------======@======---------\n");
         printf("\t╭────────────────────────────────────────╮\n");
         printf("\t│             Alerta VERMELHO            │\n");
         printf("\t│                                        │\n");
@@ -216,32 +217,47 @@ void mensagem(Cidade *dados, int cod){
         printf("\t╰────────────────────────────────────────╯\n");
       break;
       case 1:
+        printf("\n\t\t---------======@======---------\n");
+        printf("\t\t              ÁRVORE            \n");
+        printf("\t\t        ▲        ▲               \n");
+        printf("\t\t       ▲▲▲      ▲▲▲              \n");
+        printf("\t\t      ▲▲▲▲▲    ▲▲▲▲▲             \n");
+        printf("\t\t     ▲▲▲▲▲▲▲  ▲▲▲▲▲▲▲            \n");
+        printf("\t\t       |||      |||      |||     \n");
+        printf("\n\t\t---------======@======---------\n");
         printf("\t╭────────────────────────────────────────╮\n");
         printf("\t│             Alerta AMARELO             │\n");
         printf("\t│                                        │\n");
-        printf("\t│   - Restauração de Áreas Degradas      │\n");
+        printf("\t│   - Restauração de áreas degradas      │\n");
         printf("\t│   - Monitoramento possível focos de    │\n");
         printf("\t│     desmatamento                       │\n");
-        printf("\t│   - Promoção de Práticas Sustentáveis  │\n");
+        printf("\t│   - Promoção de práticas sustentáveis  │\n");
         printf("\t│   - Participar de programas de         │\n");
         printf("\t│     concientização de desmatamento     │\n");
-        printf("\t│   - Busca por Política de Conservação  │\n");
-        printf("\t│                                        │\n");
+        printf("\t│   - Busca por Política de conservação  │\n");
         printf("\t│                                        │\n");
         printf("\t│                                        │\n");
         printf("\t╰────────────────────────────────────────╯\n");
       break;
       case 2:
+        printf("\n\t\t---------======@======---------\n");
+        printf("\t\t              ÁRVORE            \n");
+        printf("\t\t        ▲        ▲        ▲      \n");
+        printf("\t\t       ▲▲▲      ▲▲▲      ▲▲▲     \n");
+        printf("\t\t      ▲▲▲▲▲    ▲▲▲▲▲    ▲▲▲▲▲    \n");
+        printf("\t\t     ▲▲▲▲▲▲▲  ▲▲▲▲▲▲▲  ▲▲▲▲▲▲▲   \n");
+        printf("\t\t       |||      |||      |||     \n");
+        printf("\n\t\t---------======@======---------\n");
         printf("\t╭────────────────────────────────────────╮\n");
         printf("\t│             Alerta VERDE               │\n");
         printf("\t│                                        │\n");
         printf("\t│   - Estabelecer Reservas Naturais      │\n");
-        printf("\t│   - Promover Agricultura Sustentável   │\n");
-        printf("\t│   - Ter Uma Fiscalização Eficaz        │\n");
-        printf("\t│   - Educação Ambiental                 │\n");
-        printf("\t│   - Participação em Programas de       │\n");
+        printf("\t│   - Promover agricultura sustentável   │\n");
+        printf("\t│   - Ter Uma fiscalização eficaz        │\n");
+        printf("\t│   - Educação ambiental                 │\n");
+        printf("\t│   - Participação em programas de       │\n");
         printf("\t│     Reflorestamento                    │\n");
-        printf("\t│   - Apoiar Projetos de Conservação     │\n");
+        printf("\t│   - Apoiar projetos de conservação     │\n");
         printf("\t│                                        │\n");
         printf("\t│                                        │\n");
         printf("\t╰────────────────────────────────────────╯\n");
@@ -292,9 +308,7 @@ int carregarCidades(Cidade **cidades, char nomeArquivoEstoque[], int *qtd_cidade
 }
 
 
-
-
-//FUNCAO TESTE, PODE SER MODIFICADA DE ACORDO COM AS MODIFICACOES
+// FUNCAO DO MENU PRINCIPAL
 void menuPrincipal(){
   printf("\n\t\t--------== SustentCity ==--------\n");
   

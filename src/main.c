@@ -8,6 +8,7 @@ int main(void) {
   int codigobuscar;
 
   char nomeArquivoEstoque[] = "data/cidades.txt";
+  char nomeCredito[] = "data/credito.txt";
 
   Cidade *cidades = NULL;
 
@@ -51,16 +52,20 @@ int main(void) {
                 removerCidade(&cidades, &qtd_cidades, codigobuscar);
                 break;
             case 6:
-                
+                if(credito(nomeCredito)){
+                  printf("Salvo com sucesso!\n");
             break;
             default:
-                printf("Programa Encerrado!");
+                if(opcao != 0){
+                  printf("\tOpção não adicioando!\n");
+                }
                 break;
         }
-
+  if(opcao != 0){
     printf("\n\nPressione Enter para Retornar ao Menu de Opções\n");
     getchar();
     getchar();
+  }
     }while (opcao != 0);
   free(cidades);
   return 0;
