@@ -5,6 +5,7 @@ int main(void) {
 
   int opcao;
   int qtd_cidades;
+  int codigobuscar;
 
   char nomeArquivoEstoque[] = "data/cidades.txt";
 
@@ -13,6 +14,7 @@ int main(void) {
   //Carrega os dados no arquivo, pode ser removido depois ou tratado melhor
   if(carregarCidades(&cidades, nomeArquivoEstoque, &qtd_cidades)){
     printf("AVISO DE TESTES...\nCIDADES CARREGADAS\n");
+    
   }else{
     printf("Erro ao carregar cidades\n");
   }
@@ -46,13 +48,19 @@ int main(void) {
                 }
                 break;
             case 5:
-
+                removerCidade(&cidades, &qtd_cidades, codigobuscar);
                 break;
+            case 6:
+                
+            break;
             default:
                 printf("Programa Encerrado!");
                 break;
         }
-    
+
+    printf("\n\nPressione Enter para Retornar ao Menu de Opções\n");
+    getchar();
+    getchar();
     }while (opcao != 0);
   free(cidades);
   return 0;

@@ -29,4 +29,13 @@ OBS: Terão funções orientando usuários para respectivos níveis.
 
 
 
-# 
+# UTILIZANDO DADOS GEOGRAFICOS DE DESMATAMENTO DO SITE 
+https://www.dpi.inpe.br/prodesdigital/prodesmunicipal.php
+https://cidades.ibge.gov.br/brasil/ba/irece/panorama
+
+
+Irecê 74321.000 319.000 280.000 87.8 232.98 VERMELHO 0
+Uibaí 13492.000 545.000 245.000 45.0 24.76 AMARELO 1
+Ibipeba 16603.000 1382.000 498.000 36.0 12.01 VERDE 2
+Lapão 25739.000 642.000 565.000 88.0 40.09 VERMELHO 3
+Salvador 2418055.000 693.000 213.000 30.7 3489.26 VERDE 4

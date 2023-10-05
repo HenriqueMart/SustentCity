@@ -8,16 +8,11 @@
 
 typedef struct {
 
-  //Gerando uma cidade de lixo de memória
-  //Erro no o nível, não salvando. verificando a fórmula por população, está errado
-  //Só vai salvar ser tiver alguns cidade a mais do que está no arquivo salvo, para não salvar espaço vazio.
-  //nível da cidade amarelo, verde ...
   char nivel[letras];
   //Mostrar porcentagem de desmatamento
   float porcentagem; 
-  //Mostrar a taxa da população por área  9metro^2 (OMS)
+  //Calculo da populacao por area sendo calculado pela populacao dividido pela area
   float populacaoporarea;
-  //
   char nome[letras];
   float populacao;
   float area;
@@ -49,18 +44,14 @@ int carregarCidades(Cidade **cidades, char nomeArquivoEstoque[], int *qtd_cidade
 void mensagem(Cidade *dados, int cod);
 
 
+//BUSCAR INDICE PELO CODIGO
+int buscarIndice(Cidade *cidades, int qtd_cidades, int codigobuscar);
 
+//FUNCAO QUE BUSCA PELO NOME
+int buscarNome(Cidade *cidades, int qtd_cidades, char *nomeBuscar);
 
-
-
-
-
-
-
-
-
-
-
+//FUNCAO QUE REMOVE A CIDADE PELO INDICE/CODIGO
+void removerCidade(Cidade **cidades, int *qtd_cidades, int codigoRemover);
 
 
 #endif
