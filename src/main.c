@@ -5,24 +5,21 @@ int main(void) {
 
   int opcao;
   int qtd_cidades;
+  int qtd_colaboradores;
   int codigobuscar;
 
   char nomeArquivoEstoque[] = "data/cidades.txt";
-  char nomeCredito[] = "data/credito.txt";
 
   Cidade *cidades = NULL;
 
   //Carrega os dados no arquivo, pode ser removido depois ou tratado melhor
   if(carregarCidades(&cidades, nomeArquivoEstoque, &qtd_cidades)){
-    printf("AVISO DE TESTES...\nCIDADES CARREGADAS\n");
-    
   }else{
     printf("Erro ao carregar cidades\n");
   }
     
   do {
 
-        //FUNCAO COM O MENU PRINCIPAL, MELHOR PARA POLUIR MENOS A MAIN
         menuPrincipal();
         printf("\n\nDigite uma Opcao: ");
         scanf("%d", &opcao);
@@ -52,8 +49,8 @@ int main(void) {
                 removerCidade(&cidades, &qtd_cidades, codigobuscar);
                 break;
             case 6:
-                if(credito(nomeCredito)){
-                  printf("Salvo com sucesso!\n");
+                  credito();
+                  break;
             break;
             default:
                 if(opcao != 0){
@@ -61,6 +58,7 @@ int main(void) {
                 }
                 break;
         }
+    
   if(opcao != 0){
     printf("\n\nPressione Enter para Retornar ao Menu de Opções\n");
     getchar();

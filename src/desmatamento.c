@@ -1,7 +1,7 @@
 #include "desmatamento.h"
 
 int cadastrarCidade(Cidade **cidades, int *qtd_cidades) {
-    int novoTamanho = *qtd_cidades + 1; 
+    int novoTamanho = *qtd_cidades + 1;
 
     Cidade *novaAloc =
         (Cidade *)realloc(*cidades, novoTamanho * sizeof(Cidade));
@@ -18,20 +18,20 @@ int cadastrarCidade(Cidade **cidades, int *qtd_cidades) {
         return 0;
     }
 
-    printf("Digite o nome da cidade: ");
+    printf("Digite o Nome da Cidade: ");
     scanf("%s", novacidade->nome);
 
-    printf("Digite a populacao: ");
+    printf("Digite a Populacao: ");
     scanf("%f", &novacidade->populacao);
 
-    printf("Digite a area, em Km²: ");
+    printf("Digite a Área, em Km²: ");
     scanf("%f", &novacidade->area);
 
-    printf("Digite a area desmatada, em Km²: ");
+    printf("Digite a Área Desmatada, em Km²: ");
     scanf("%f", &novacidade->area_desmatada);
 
-   /* printf("Digite o codigo da cidade: ");
-    scanf("%d", &novacidade->codigo);*/
+    printf("Digite o Código da Cidade: ");
+    scanf("%d", &novacidade->codigo);
 
     //Criando a fórmula que irá gerar a porcentagem
     if(novacidade->area < novacidade->area_desmatada){
@@ -45,18 +45,9 @@ int cadastrarCidade(Cidade **cidades, int *qtd_cidades) {
       //Para gerar a porcentagem era a area desmatada pela area atual * 100
       novacidade->porcentagem = (novacidade->area_desmatada / novacidade->area) * 100.00;
     }
-    
-    //Gerando a densidade demografica, habitante por km²
-  /*Área Verde por Pessoa = (Porcentagem de Área Verde * Área Total) /   População
 
-Por exemplo, se 20% da área total é composta por áreas verdes e você tem uma população de 100.000 pessoas em uma área de 50 km²:
-
-Área Verde por Pessoa = (0,20 * 50 km²) / 100.000 = 0,1 km² por pessoa
-
-Portanto, em média, cada pessoa teria acesso a 0,1 quilômetro quadrado de área verde.*/
     novacidade->populacaoporarea = (novacidade->porcentagem * novacidade->area) * novacidade->populacao;
   
-  /* OBS DE GABRIEL: Nao entendi a logica, é a porcentagem de desmatamento? Se for a atribuição é ao contrario, se o nivel de desmatamento for de 1.1 porcento, ele é verde */ //Só inverter os dados e registrar novamente a cidade
   if(novacidade->porcentagem < 40.0){
     char nivelverde[] = "VERDE";
     strcpy(novacidade->nivel, nivelverde);
@@ -68,19 +59,16 @@ Portanto, em média, cada pessoa teria acesso a 0,1 quilômetro quadrado de áre
     strcpy(novacidade->nivel, nivelvermelho);
   }
   
-    novacidade->codigo = *qtd_cidades;
     (*cidades)[*qtd_cidades] = *novacidade;
     (*qtd_cidades)++;
-
+  
     system("clear");
-    printf("Indice de população por 9 metro %.2f\n", novacidade->populacao);
     free(novacidade);
     return 1;
 }
 
-//RELATORIO TESTE, ADICIONADO UMA FORMA DE MOSTRAR DETALHES SO SE QUISER
+//FUNCAO PARA GERAR O RELATORIO DAS CIDADES
 void gerarRelatorio(Cidade *cidades, int qtd_cidades){
-  //TROQUEI DE CLS PARA CLEAR
   system("clear");
     int opmenu;
     if(qtd_cidades > 0){
@@ -117,31 +105,34 @@ void gerarRelatorio(Cidade *cidades, int qtd_cidades){
     }
 }
 
-/* Verificação da Área: Irá verificar os dados que usuário digitou no cadastro, assim verificando a taxa de desmatamento, comparando com sua área atual, com níveis: Verde, amarelo e vermelho. 
-OBS: Terão funções orientando usuários para respectivos níveis. */
+/* Verificação da Área: Irá verificar os dados que usuário digitou no cadastro, assim verificando a taxa de desmatamento, comparando com sua área atual, com níveis: Verde, amarelo e vermelho. */
 void indicedesmatamento(Cidade *dados, int tquantidade){
   system("clear");
   int opcao = 0, cod;
-  printf("\n\t\tTELA DE MONITORAMENTO\n");
-  printf("\tEscolha a opção:\n");
-  printf("\t1 - Verificar todas as Cidades Cadastrada\n");
-  printf("\t2 - Digitar o Código da Cidade\n\n\tDigite a opção:");
+  printf("\n\t\tTELA DE MONITORAMENTO\n\n");
+  printf("\tEscolha a opção:\n\n");
+  printf("\t1 - Verificar todas as Cidades Cadastradas\n");
+  printf("\t2 - Digitar o Código da Cidade\n\n\tDigite a opção: ");
   scanf("%d", &opcao);
   system("clear");
   switch(opcao){
     case 1:
       gerarRelatorio(dados, tquantidade);
-  
     case 2:
       printf("\n\t\tTELA DE MONITORAMENTO\n");
       printf("\n\t---------======@======---------\n");
       printf("\n\tDigite o codigo: ");
       scanf("%d", &cod);
-      int indice = buscarIndice(dados, tquantidade, cod);
-      /*Criar um buscar pelo código ou nome da cidade */
-      if(indice != -1){
-        //Mostrar o gráfico interativo
-        mensagem(dados, cod);
+      int indice = -1;
+        for (int i = 0; i < tquantidade; i++) {
+            if (dados[i].codigo == cod) {
+                indice = i;
+                break;
+            }
+        }
+      if(indice != -1) {
+        // Cidade encontrada, mostrar o gráfico interativo
+        mensagem(dados, indice);
       }else{
         printf("\n\tCidade Não Encontrada!\n");
       }
@@ -155,15 +146,15 @@ void indicedesmatamento(Cidade *dados, int tquantidade){
 void mensagem(Cidade *dados, int cod){
   int codigo = -1;
   system("clear");
-  printf("\n\t---------======@======---------\n");
-  printf("\t\t\tCidade: %s\n", dados[cod].nome);
-  printf("\n\t---------======@======---------\n");
-  printf("\t\tPorcentagem de Área Desmatada\n");
+  printf("\n\t\t---------======@======---------\n");
+  printf("\t\t\t\tCidade: %s\n", dados[cod].nome);
+  printf("\t\t---------======@======---------\n");
+  printf("\n\t\tPorcentagem de Área Desmatada\n");
   float auxporcentagem;
   if(dados[cod].porcentagem  < 5){
       auxporcentagem = 5;
   }else{
-    auxporcentagem = dados[cod].porcentagem ;
+    auxporcentagem = dados[cod].porcentagem; 
   }
   for(int i = 0; i < 1; i++){
     printf("\t\t ╔═══════════════════════╗\n");
@@ -199,11 +190,11 @@ void mensagem(Cidade *dados, int cod){
     switch(codigo){
       case 0:
         printf("\n\t\t---------======@======---------\n");
-        printf("\t\t           Alerta VERMELHO       \n");
-        printf("\t\t        ▲        ▲        ▲      \n");
-        printf("\t\t       ▲▲▲      ▲▲▲      ▲▲▲     \n");
-        printf("\t\t      ▲▲▲▲▲    ▲▲▲▲▲    ▲▲▲▲▲    \n");
-        printf("\t\t     ▲▲▲▲▲▲▲  ▲▲▲▲▲▲▲  ▲▲▲▲▲▲▲   \n");
+        printf("\t\t         Alerta VERMELHO         \n");
+        printf("\t\t        ▲                        \n");
+        printf("\t\t       ▲▲▲                       \n");
+        printf("\t\t      ▲▲▲▲▲                      \n");
+        printf("\t\t     ▲▲▲▲▲▲▲                     \n");
         printf("\t\t       |||      |||      |||     \n");
         printf("\n\t\t---------======@======---------\n");
         printf("\t╭────────────────────────────────────────╮\n");
@@ -232,10 +223,10 @@ void mensagem(Cidade *dados, int cod){
         printf("\t╭────────────────────────────────────────╮\n");
         printf("\t│                ORIENTAÇÂO              │\n");
         printf("\t│                                        │\n");
-        printf("\t│   - Restauração de áreas degradas      │\n");
-        printf("\t│   - Monitoramento possível focos de    │\n");
+        printf("\t│   - Restauração de áreas degradadas    │\n");
+        printf("\t│   - Monitorar possíveis focos de       │\n");
         printf("\t│     desmatamento                       │\n");
-        printf("\t│   - Promoção de práticas sustentáveis  │\n");
+        printf("\t│   - Promover práticas sustentáveis     │\n");
         printf("\t│   - Participar de programas de         │\n");
         printf("\t│     concientização de desmatamento     │\n");
         printf("\t│   - Busca por Política de conservação  │\n");
@@ -314,6 +305,7 @@ int carregarCidades(Cidade **cidades, char nomeArquivoEstoque[], int *qtd_cidade
 
 // FUNCAO DO MENU PRINCIPAL
 void menuPrincipal(){
+  system("clear");
   printf("\n\t\t--------== SustentCity ==--------\n");
   
   printf("\t╭────────────────────────────────────────╮\n");
@@ -338,8 +330,8 @@ void menuPrincipal(){
 // FUNCAO PARA BUSCAR INDICE
 int buscarIndice(Cidade *cidades, int qtd_cidades, int codigobuscar){
 
-  for (int i = 1; i <= qtd_cidades; i++) {
-        if (codigobuscar == cidades[i - 1].codigo) {
+  for (int i = 0; i <= qtd_cidades; i++) {
+        if (codigobuscar == cidades[i].codigo) {
             return i;
         }
     }
@@ -382,14 +374,17 @@ void removerCidade(Cidade **cidades, int *qtd_cidades, int codigobuscar) {
     } else {
         printf("\tCidade não encontrada.\n");
     }
-}
-void credito(char nomeCredito){
+} 
+
+// CREDITOS DO PROJETO
+void credito(){
   system("clear");
-  printf("\n\tCRÉDITO DO PROJETO\n");
-  printf("\n\tDESENVOLVEDORES:\n");
+  printf("\n\tDESENVOLVEDORES DO PROJETO:\n");
   printf("\n\tJosé Henrique Martins B. Silva");
-  printf("\n\tGabriel\n");
-  
-  //FILE *Arquivo = fopen("");
-  
+
+  printf("\n\tGabriel Barauna De Souza\n");
+  printf("\n\n\tTodos os Dados Foram Referentes ao Censo 2022\n");
+  printf("\n\tFonte:\n");
+  printf("\n\thttps://cidades.ibge.gov.br");
+  printf("\n\thttps://www.dpi.inpe.br/prodesdigital/prodesmunicipal.php\n\n");
 }

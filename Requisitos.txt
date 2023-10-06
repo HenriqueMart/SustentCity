@@ -1,41 +1,5 @@
-DESCRIÇÃO:
-
-## Mostrar o Índice de desmatamento de uma cidade de acordo com sua área e população. O objeto é analisar a área desmatada e sua área verde permitindo que o usuário visualize o nível atual do desmatamento. Com o foco de informar o usuário da área afetada, para que possam ter medidas adequadas de prevenção. ##
-
-
-AQUI ESTA TODOS OS REQUISITOS PRE ADICIONADOS NO FORMULARIO:
- obs: caso for adicionar outro, coloque em baixo com uma observação.
-
-
-
-# Cadastro de cidades: Struct, alocado dinamicamente, onde vai verificar primeiro se a cidade já foi cadastrada no arquivo antes de começar o cadastro. Depois da verificação será cadastrada a Cidade, População, área atual e área desmatada. Por fim, o usuário escolhe se deseja guardar esse dado no "banco de dados".
-
-
-
-# Gerar Relatório: Irá percorrer toda Struct, onde irá mostrar todas as cidades e suas respectivas populações e áreas.
-
-
-
-# Verificação da Área: Irá verificar os dados que usuário digitou no cadastro, assim verificando a taxa de desmatamento, comparando com sua área atual, com níveis: Verde, amarelo e vermelho. 
-OBS: Terão funções orientando usuários para respectivos níveis. 
-
-
-
-# Função salvar: Irá criar um arquivo .TXT, enviando todos os dados que foram preenchidos na memória do programa para o arquivo.
-
-
-
-# Função carregar: Vai alocar dinamicamente um espaço de memória, onde irá carregar o arquivo, preenchendo com todos os dados pré adicionados em um .TXT.
-
-
-
-# UTILIZANDO DADOS GEOGRAFICOS DE DESMATAMENTO DO SITE 
-https://www.dpi.inpe.br/prodesdigital/prodesmunicipal.php
-https://cidades.ibge.gov.br/brasil/ba/irece/panorama
-
-
-Irecê 74321.000 319.000 280.000 87.8 232.98 VERMELHO 0
-Uibaí 13492.000 545.000 245.000 45.0 24.76 AMARELO 1
-Ibipeba 16603.000 1382.000 498.000 36.0 12.01 VERDE 2
-Lapão 25739.000 642.000 565.000 88.0 40.09 VERMELHO 3
-Salvador 2418055.000 693.000 213.000 30.7 3489.26 VERDE 4
+Irecê 74321.000 319.000 280.000 87.8 232.98 VERMELHO 1
+Uibaí 13492.000 545.000 245.000 45.0 24.76 AMARELO 2
+Ibipeba 16603.000 1382.000 498.000 36.0 12.01 VERDE 3
+Lapão 25739.000 642.000 565.000 88.0 40.09 VERMELHO 4
+Salvador 2418055.000 693.000 213.000 30.7 3489.26 VERDE 5
