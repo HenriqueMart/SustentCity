@@ -5,7 +5,6 @@ int main(void) {
 
   int opcao;
   int qtd_cidades;
-  int qtd_colaboradores;
   int codigobuscar;
 
   char nomeArquivoEstoque[] = "data/cidades.txt";

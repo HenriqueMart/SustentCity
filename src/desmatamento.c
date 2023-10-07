@@ -19,7 +19,7 @@ int cadastrarCidade(Cidade **cidades, int *qtd_cidades) {
     }
 
     printf("Digite o Nome da Cidade: ");
-    scanf("%s", novacidade->nome);
+    scanf("%s[^\n]", novacidade->nome);
 
     printf("Digite a Populacao: ");
     scanf("%f", &novacidade->populacao);
@@ -46,7 +46,7 @@ int cadastrarCidade(Cidade **cidades, int *qtd_cidades) {
       novacidade->porcentagem = (novacidade->area_desmatada / novacidade->area) * 100.00;
     }
 
-    novacidade->populacaoporarea = (novacidade->porcentagem * novacidade->area) * novacidade->populacao;
+    novacidade->populacaoporarea = (novacidade->porcentagem * novacidade->area) / novacidade->populacao;
   
   if(novacidade->porcentagem < 40.0){
     char nivelverde[] = "VERDE";
@@ -102,10 +102,11 @@ void gerarRelatorio(Cidade *cidades, int qtd_cidades){
       }
     }else{
         printf("\tNenhuma cidade cadastrada!\n");
+        return;
     }
 }
 
-/* Verificação da Área: Irá verificar os dados que usuário digitou no cadastro, assim verificando a taxa de desmatamento, comparando com sua área atual, com níveis: Verde, amarelo e vermelho. */
+/* Indice de desmatamento Mostrando e gráfico e alertando o usuário*/
 void indicedesmatamento(Cidade *dados, int tquantidade){
   system("clear");
   int opcao = 0, cod;
@@ -384,6 +385,8 @@ void credito(){
 
   printf("\n\tGabriel Barauna De Souza\n");
   printf("\n\n\tTodos os Dados Foram Referentes ao Censo 2022\n");
+  printf("\tPara Mais Informações acesse:");
+  printf("https://brasilescola.uol.com.br/geografia/o-desmatamento.htm\n");
   printf("\n\tFonte:\n");
   printf("\n\thttps://cidades.ibge.gov.br");
   printf("\n\thttps://www.dpi.inpe.br/prodesdigital/prodesmunicipal.php\n\n");
